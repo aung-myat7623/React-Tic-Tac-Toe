@@ -1,12 +1,46 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Tourney:ital,wght@0,100..900;1,100..900&display=swap');
+
+.player-name, .player-symbol, .game-board ol button {
+  font-family: Tourney, Arial;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  --secondary-color: #264653;
+  --yellow-color: #E9C46A;
+  --green-color: #2A9D8F;
+}
+
 body {
-  font-family: Arial, Sans-Serif;
+  font-family: Tourney, Arial, Sans-Serif;
+  color: white;
   line-height: 1.5rem;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url("bg.jpeg") no-repeat center center/cover;
+}
+
+/* Header */ 
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+header img {
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 /* Game Board Wrapper */
@@ -15,6 +49,76 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #333;
+  padding: 2rem;
+  width: 80%;
+  margin: 0px auto;
+  border-radius: 1rem;
+}
+
+/* Players */
+.players {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.players ol {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.players ol .player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.player input, .player-name {
+  width: 5rem;
+}
+
+.player input {
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  background-color: #f4f4f4;
+}
+
+.player input::placeholder {
+  font-family: Tourney, Arial;
+  text-align: center;
+}
+
+.player input:focus {
+  border: var(--green-color) 1px solid;
+}
+
+.player button {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem;
+  color: white;
+  font-family: Tourney, Arial;
+}
+
+.player button.edit {
+  background-color: var(--secondary-color);
+}
+
+.player button.save {
+  background-color: var(--green-color);
+}
+
+/* active player */
+.active {
+  color: var(--yellow-color);
+  border: 1px var(--yellow-color) solid;
 }
 
 /* Game Board */
@@ -30,14 +134,81 @@ ol {
 ol ol {
   display: flex;
   flex-direction: row;
+  margin: 5px 0px;
 }
 
 .game-board li button {
   width: 5rem;
   height: 5rem;
+  text-align: center;
+  font-size: 4rem;
+  border: none;
+  outline: none;
+  font-family: Tourney, Arial;
 }
 
-/* active player */
-.active {
-  border: 1px black solid;
+.game-board ol ol li:nth-child(2n+0) {
+  margin: 0px 10px;
+}
+
+.game-board li button:disabled {
+  background-color: var(--yellow-color);
+  color: #333;
+}
+
+/* Gameover overlay */
+.gameover-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+}
+
+.gameover-container .gameover {
+  background-color: var(--secondary-color);
+  opacity: 0.9;
+  height: 80%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.gameover p {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.gameover button {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem;
+  border: var(--yellow-color) 2px solid;
+  color: var(--yellow-color);
+  font-family: Tourney, Arial;
+  background-color: transparent;
+}
+
+/* Logger */
+.game-logs {
+  position: fixed;
+  bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.game-logs li {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  left: -100%;
+  bottom: 1rem;
 }

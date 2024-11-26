@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
 import Log from "./components/Log";
+import Gameover from "./components/Gameover";
+
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
 
 const initialGameBoard = [
@@ -73,8 +75,9 @@ export default function App() {
     })
   }
   
+  
   const handleRestart = () => {
-    setGameTurns([])
+    setGameTurns([]);
   }
   
   
@@ -92,8 +95,8 @@ export default function App() {
           <GameBoard handleActivePlayer={handleActivePlayer} gameBoard={gameBoard} hasWinner={winner}/>
         </div>
         {/* Gameover */}
-        { winner && <p>{winner} has won! <button onClick={handleRestart}>Restart</button></p>}
-        { (gameTurns.length === 9 && !winner ) && <p>It is a Draw! <button onClick={handleRestart}>Restart</button></p>  }
+        { winner && <Gameover msg={`${winner} has won!`} handleRestart={handleRestart}/>}
+        { (gameTurns.length === 9 && !winner ) && <Gameover msg="It's a draw!" handleRestart={handleRestart} /> }
       </main>
       <Log gameTurns={gameTurns} />
     </>

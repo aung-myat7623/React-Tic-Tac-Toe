@@ -7,7 +7,12 @@ export default function Player({name, symbol, isActive, handleChangeNewName}) {
   let nameAndInputChange = <div className="player-name">{playerName}</div>;
   
   const handleChangeName = (e) => {
-    setPlayerName(e.target.value);
+    let newName = e.target.value
+    
+    if (newName.length > 5) {
+      newName = newName.slice(0, 5) + "..."
+    }
+    setPlayerName(newName);
   }
   
   const handleChangeClick = () => {
@@ -18,16 +23,16 @@ export default function Player({name, symbol, isActive, handleChangeNewName}) {
   }
   
   if (isEditing) {
-    nameAndInputChange = <input type="text" value={playerName} onChange={handleChangeName} />
+    nameAndInputChange = <input type="text" placeholder={playerName} onChange={handleChangeName} />
   }
   
   return (
-    <li className={ isActive ? "active" : null}>
+    <li className={ isActive ? "active player" : "player"}>
       <div className="player-info">
         {nameAndInputChange}
         <div className="player-symbol">{symbol}</div>
       </div>
-      <button onClick={handleChangeClick}>{ isEditing ? "Save" : "Edit" }</button>
+      <button onClick={handleChangeClick} className={isEditing ? "save" : "edit" }>{ isEditing ? "Save" : "Edit" }</button>
     </li>
     )
 }
