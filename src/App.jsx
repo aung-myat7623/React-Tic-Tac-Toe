@@ -44,6 +44,7 @@ export default function App() {
   }
   
   let winner;
+  let gameoverStatus = "hide-gameover";
   
   for ( const pattern of WINNING_COMBINATIONS) {
     const firstSymbol = gameBoard[pattern[0]["row"]][pattern[0]["column"]];
@@ -76,11 +77,14 @@ export default function App() {
   }
   
   
+  (winner || gameTurns.length == 9) ? gameoverStatus = "show-gameover" : gameoverStatus = "hide-gameover";
+  
   const handleRestart = () => {
+    gameoverStatus = "hide-gameover"
+    console.log(gameoverStatus)
     setGameTurns([]);
   }
-  
-  
+  console.log(gameoverStatus)
   return (
     <>
       <Header />
@@ -95,8 +99,10 @@ export default function App() {
           <GameBoard handleActivePlayer={handleActivePlayer} gameBoard={gameBoard} hasWinner={winner}/>
         </div>
         {/* Gameover */}
-        { winner && <Gameover msg={`${winner} has won!`} handleRestart={handleRestart}/>}
-        { (gameTurns.length === 9 && !winner ) && <Gameover msg="It's a draw!" handleRestart={handleRestart} /> }
+        <div className={`gameover-container ${gameoverStatus}`}>
+          { winner && <Gameover msg={`${winner} has won!`} handleRestart={handleRestart} />}
+          { (gameTurns.length === 9 && !winner ) && <Gameover msg="It's a draw!" handleRestart={handleRestart} /> }
+        </div>
       </main>
       <Log gameTurns={gameTurns} />
     </>

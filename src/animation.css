@@ -1,0 +1,56 @@
+/* Game logs animations */
+
+.game-logs li.current-log {
+  animation: showCurrentLog forwards 0.5s ease;
+}
+
+.game-logs li.previous-log {
+  animation: hidePreviousLog forwards 0.5s ease;
+}
+
+@keyframes showCurrentLog {
+  to {
+    left: 0;
+  }
+}
+
+@keyframes hidePreviousLog {
+  to {
+    left: 100%;
+  }
+}
+
+/* Gameover overlay animation */
+.gameover-container.show-gameover {
+  z-index: 5;
+}
+
+.gameover-container.show-gameover .gameover {
+  animation: showGameover forwards 0.5s ease;
+}
+
+.gameover-container.hide-gameover {
+  animation: hideGameover forwards 0.5s ease;
+}
+
+@keyframes showGameover {
+  from {
+    scale: 0;
+  }
+  
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes hideGameover {
+  from {
+    scale: 1;
+    z-index: 0;
+  }
+  
+  to {
+    scale: 0;
+    z-index: 1;
+  }
+}
